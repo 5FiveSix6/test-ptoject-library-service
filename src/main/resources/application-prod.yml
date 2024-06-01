@@ -1,0 +1,9 @@
+spring:
+  config:
+    import: optional:file:.env[.properties]
+  datasource:
+    url: jdbc:postgresql://library_service_db:5432/${POSTGRES_DATABASE}?currentSchema=library_schema
+    username: ${POSTGRES_USERNAME}
+    password: ${POSTGRES_PASSWORD}
+  liquibase:
+    default-schema: library_schema

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <changeSet id="1" author="Yuriy N.">
+        <createTable tableName="t_books">
+            <column name="id" type="bigserial">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="c_title" type="varchar(255)">
+                <constraints nullable="false" checkConstraint="LENGTH(TRIM(c_title)) > 5"/>
+            </column>
+            <column name="c_isbn" type="varchar(13)">
+                <constraints nullable="false" unique="true" checkConstraint="LENGTH(TRIM(c_isbn)) = 13"/>
+            </column>
+            <column name="c_created_at" type="date">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="2" author="Yuriy N.">
+        <addUniqueConstraint columnNames="c_title, c_created_at" tableName="t_books"/>
+    </changeSet>
+</databaseChangeLog>

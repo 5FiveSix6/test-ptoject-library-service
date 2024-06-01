@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <changeSet id="1" author="Yuriy N.">
+        <createTable tableName="t_authors_books">
+            <column name="id" type="bigserial">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="author_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="book_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="2" author="Yuriy N.">
+        <addForeignKeyConstraint baseTableName="t_authors_books" baseColumnNames="author_id"
+                                 constraintName="fk_author_id_authors" referencedTableName="t_authors"
+                                 referencedColumnNames="id" onDelete="CASCADE" onUpdate="NO ACTION"/>
+    </changeSet>
+    <changeSet id="3" author="Yuriy N.">
+        <addForeignKeyConstraint baseTableName="t_authors_books" baseColumnNames="book_id"
+                                 constraintName="fk_book_id_books" referencedTableName="t_books"
+                                 referencedColumnNames="id" onDelete="CASCADE" onUpdate="NO ACTION"/>
+    </changeSet>
+    <changeSet id="4" author="Yuriy N.">
+        <addUniqueConstraint tableName="t_authors_books" columnNames="author_id, book_id"/>
+    </changeSet>
+</databaseChangeLog>
